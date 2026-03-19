@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Creaciones Ágape</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-symbol">✦</span>
+        <div>
+          <h1>Creaciones Ágape</h1>
+          <p class="tagline">Adornos &amp; Llaveros Artesanales</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#catalogo" class="nav-link">Catálogo</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+        <button class="cart-btn" id="cartBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Colección Artesanal</p>
+      <h2 class="hero-title">Piezas únicas<br/><em>hechas con amor</em></h2>
+      <p class="hero-desc">Adornos y llaveros personalizados, cada uno creado a mano con dedicación y cariño.</p>
+      <a href="#catalogo" class="btn-primary">Ver Catálogo</a>
+    </div>
+    <div class="hero-decoration">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-circle c3"></div>
+    </div>
+  </section>
+
+  <!-- FILTROS DE CATEGORÍAS -->
+  <section id="catalogo" class="catalog-section">
+    <div class="section-header">
+      <h3>Nuestros Productos</h3>
+      <div class="divider"></div>
+    </div>
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="Todos">Todos</button>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="products-grid" id="productsGrid">
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <p>Cargando productos...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="about-section">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-eyebrow">Nuestra Historia</p>
+        <h3>Hechos con <em>amor</em></h3>
+        <p>En Creaciones Ágape cada pieza es única. Trabajamos con materiales de calidad para crear adornos y llaveros que transmiten cariño en cada detalle. Personalizamos cada pedido con dedicación.</p>
+        <p>Ágape, que significa amor incondicional, es la esencia de todo lo que creamos.</p>
+      </div>
+      <div class="about-visual">
+        <div class="visual-grid">
+          <div class="vg-item vg1">✦</div>
+          <div class="vg-item vg2">◈</div>
+          <div class="vg-item vg3">❋</div>
+          <div class="vg-item vg4">✿</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact-section">
+    <p class="section-eyebrow">¿Tienes preguntas?</p>
+    <h3>Contáctanos</h3>
+    <p class="contact-desc">Estamos aquí para ayudarte con pedidos personalizados o cualquier consulta.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/TUNUMERO" class="contact-card" target="_blank" id="contactWhatsapp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.852L.057 23.57a.75.75 0 00.918.918l5.718-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.51-5.17-1.397l-.37-.22-3.833.985.998-3.718-.242-.386A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp
+      </a>
+      <a href="mailto:TUCORREO@gmail.com" class="contact-card" id="contactEmail">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>✦ Creaciones Ágape — Hecho con amor ✦</p>
+    <p class="footer-small"><a href="admin.html" style="color:inherit;opacity:0.4;text-decoration:none;">Administración</a></p>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h4>Tu Carrito</h4>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Tu carrito está vacío</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn-secondary" onclick="sendWhatsApp()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.852L.057 23.57a.75.75 0 00.918.918l5.718-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.51-5.17-1.397l-.37-.22-3.833.985.998-3.718-.242-.386A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Pedir por WhatsApp
+        </button>
+        <button class="btn-outline" onclick="sendEmail()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviar por Email
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="product-modal" id="productModal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-img-wrap">
+        <img id="modalImg" src="" alt="" />
+      </div>
+      <div class="modal-info">
+        <p class="modal-cat" id="modalCat"></p>
+        <h3 id="modalName"></h3>
+        <p class="modal-desc" id="modalDesc"></p>
+        <p class="modal-price" id="modalPrice"></p>
+        <div class="modal-qty">
+          <button onclick="changeQty(-1)">−</button>
+          <span id="modalQty">1</span>
+          <button onclick="changeQty(1)">+</button>
+        </div>
+        <button class="btn-primary full-btn" onclick="addToCartFromModal()">Agregar al Carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
