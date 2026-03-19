@@ -13,7 +13,10 @@ async function loadProducts() {
   const loading = document.getElementById('loadingState');
 
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`;
+    // Acepta tanto la URL completa de publicación como solo el ID
+    const url = CONFIG.SHEET_ID.startsWith('http')
+      ? CONFIG.SHEET_ID
+      : `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`;
     const res = await fetch(url);
     if (!res.ok) throw new Error('No se pudo cargar');
     const csv = await res.text();
