@@ -259,16 +259,43 @@ function buildOrderMessage() {
 // ── Send via WhatsApp ──
 function sendWhatsApp() {
   if (cart.length === 0) return;
+  saveOrder('WhatsApp');
   const msg = encodeURIComponent(buildOrderMessage());
-  window.open(`https://wa.me/${CONFIG.WHATSAPP}?text=${msg}`, '_blank');
+  // Abre WhatsApp Web en el navegador (funciona en móvil y ordenador)
+  window.open(`https://web.whatsapp.com/send?phone=${CONFIG.WHATSAPP}&text=${msg}`, '_blank');
 }
 
-// ── Send via Email (mailto) ──
+// ── Send via Email (Gmail Web) ──
 function sendEmail() {
   if (cart.length === 0) return;
+  saveOrder('Email');
   const subject = encodeURIComponent(`Pedido — ${CONFIG.STORE_NAME}`);
   const body = encodeURIComponent(buildOrderMessage());
-  window.location.href = `mailto:${CONFIG.EMAIL}?subject=${subject}&body=${body}`;
+  // Abre Gmail directamente en el navegador, sin necesitar cliente de correo
+  window.open(`https://mail.google.com/mail/?view=cm&to=${CONFIG.EMAIL}&su=${subject}&body=${body}`, '_blank');
+}
+
+// ── Save order to localStorage ──
+function saveOrder(via) {
+  const orders = JSON.parse(localStorage.getItem('agape_orders') || '[]');
+  orders.unshift({
+    id: Date.now(),
+    date: new Date().toISOString(),
+    via,
+    items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+    total: cart.reduce((s, i) => s + i.price * i.qty, 0),
+  });
+  localStorage.setItem('agape_orders', JSON.stringify(orders.slice(0, 200)));
+}
+
+// ── Load banner from localStorage ──
+function loadBanner() {
+  const banner = JSON.parse(localStorage.getItem('agape_banner') || '{}');
+  if (!banner.active || !banner.text) return;
+  const el = document.getElementById('storeBanner');
+  if (!el) return;
+  el.innerHTML = `<span>${banner.text}</span><button class="banner-close" onclick="this.parentElement.style.display='none'">✕</button>`;
+  el.style.display = 'block';
 }
 
 // ── Update contact links in HTML ──
@@ -281,4 +308,5 @@ function updateContactLinks() {
 
 // ── Init ──
 updateContactLinks();
+loadBanner();
 loadProducts();

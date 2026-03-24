@@ -8,261 +8,151 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4f2;
-      --surface: #fff;
-      --text: #1a1a1a;
-      --muted: #6b6b6b;
-      --accent: #b8860b;
-      --accent-light: #f5e9c8;
-      --border: #e2ddd7;
-      --success: #2e7d32;
-      --error: #c62828;
-      --font-d: 'Cormorant Garamond', serif;
-      --font-b: 'Jost', sans-serif;
+      --bg: #f5f4f2; --surface: #fff; --text: #1a1a1a; --muted: #6b6b6b;
+      --accent: #b8860b; --accent-light: #f5e9c8; --border: #e2ddd7;
+      --success: #2e7d32; --error: #c62828;
+      --font-d: 'Cormorant Garamond', serif; --font-b: 'Jost', sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--font-b); background: var(--bg); color: var(--text); font-size: 14px; }
 
-    /* ── AUTH ── */
-    .auth-screen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .auth-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 3rem;
-      width: 100%;
-      max-width: 380px;
-      text-align: center;
-    }
+    .auth-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .auth-card { background: var(--surface); border: 1px solid var(--border); padding: 3rem; width: 100%; max-width: 380px; text-align: center; }
     .auth-card h1 { font-family: var(--font-d); font-size: 1.8rem; font-weight: 400; margin-bottom: 0.3rem; }
     .auth-card p { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
-    .auth-card input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      font-family: var(--font-b);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
+    .auth-card input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); font-family: var(--font-b); font-size: 0.95rem; margin-bottom: 1rem; outline: none; transition: border-color 0.2s; }
     .auth-card input:focus { border-color: var(--accent); }
-    .auth-card button {
-      width: 100%;
-      padding: 12px;
-      background: var(--text);
-      color: white;
-      border: none;
-      font-family: var(--font-b);
-      font-size: 0.82rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .auth-card button:hover { background: var(--accent); }
+    .auth-card .auth-btn { width: 100%; padding: 12px; background: var(--text); color: white; border: none; font-family: var(--font-b); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .auth-card .auth-btn:hover { background: var(--accent); }
     .auth-error { color: var(--error); font-size: 0.8rem; margin-top: 0.8rem; }
 
-    /* ── ADMIN LAYOUT ── */
     #adminApp { display: none; }
-    .admin-header {
-      background: var(--text);
-      color: white;
-      padding: 0 2rem;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .admin-header .logo { font-family: var(--font-d); font-size: 1.1rem; }
-    .admin-header .logo span { color: var(--accent); margin-right: 8px; }
-    .admin-nav { display: flex; gap: 1rem; align-items: center; }
-    .admin-nav a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .admin-nav a:hover { color: white; }
-    .logout-btn {
-      background: none;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.7);
-      padding: 6px 14px;
-      font-family: var(--font-b);
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .admin-header { background: var(--text); color: white; padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .admin-logo { font-family: var(--font-d); font-size: 1.1rem; }
+    .admin-logo span { color: var(--accent); margin-right: 8px; }
+    .admin-nav { display: flex; gap: 0.5rem; align-items: center; }
+    .preview-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; }
+    .preview-link:hover { color: white; border-color: rgba(255,255,255,0.4); }
+    .logout-btn { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 6px 14px; font-family: var(--font-b); font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
     .logout-btn:hover { background: rgba(255,255,255,0.1); color: white; }
 
-    .admin-main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem;
-    }
+    .tabs-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; overflow-x: auto; }
+    .tab-btn { padding: 1rem 1.4rem; border: none; background: none; font-family: var(--font-b); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
 
-    /* ── CARDS ── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-    }
-    .stat-card .label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
-    .stat-card .value { font-family: var(--font-d); font-size: 2rem; font-weight: 600; color: var(--accent); }
+    .admin-main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 
-    /* ── SECTIONS ── */
-    .section-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      margin-bottom: 2rem;
-    }
-    .section-card-header {
-      padding: 1.2rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .section-card-header h3 { font-family: var(--font-d); font-size: 1.2rem; font-weight: 400; }
-    .section-card-body { padding: 1.5rem; }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 1.2rem 1.5rem; }
+    .stat-card .lbl { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .stat-card .val { font-family: var(--font-d); font-size: 1.9rem; font-weight: 600; color: var(--accent); line-height: 1; }
+    .stat-card .sub { font-size: 0.73rem; color: var(--muted); margin-top: 4px; }
 
-    /* ── INSTRUCTIONS ── */
-    .steps { counter-reset: step; display: flex; flex-direction: column; gap: 1rem; }
-    .step {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .step-num {
-      counter-increment: step;
-      width: 28px;
-      height: 28px;
-      background: var(--accent);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .step-num::before { content: counter(step); }
-    .step-content p { font-size: 0.88rem; color: var(--text); line-height: 1.7; }
-    .step-content a { color: var(--accent); }
-    .step-content code {
-      background: var(--bg);
-      padding: 2px 6px;
-      font-size: 0.82rem;
-      border: 1px solid var(--border);
-      font-family: monospace;
-    }
-    .sheet-template {
-      margin-top: 1rem;
-      border: 1px solid var(--border);
-      overflow-x: auto;
-    }
-    .sheet-template table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .sheet-template th {
-      background: var(--text);
-      color: white;
-      padding: 8px 12px;
-      text-align: left;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-    }
-    .sheet-template td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .section-card { background: var(--surface); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .sc-header { padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    .sc-header h3 { font-family: var(--font-d); font-size: 1.15rem; font-weight: 400; }
+    .sc-body { padding: 1.5rem; }
 
-    /* ── CONFIG FORM ── */
-    .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border: none; font-family: var(--font-b); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .btn-dark { background: var(--text); color: white; }
+    .btn-dark:hover { background: var(--accent); }
+    .btn-accent { background: var(--accent); color: white; }
+    .btn-accent:hover { background: #9a7009; }
+    .btn-outline { background: none; border: 1px solid var(--border); color: var(--muted); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-danger { background: none; border: 1px solid #ffcdd2; color: var(--error); }
+    .btn-danger:hover { background: #ffebee; }
+    .btn-green { background: #e8f5e9; color: var(--success); border: 1px solid #c8e6c9; }
+    .btn-green:hover { background: #c8e6c9; }
+    .btn-sm { padding: 5px 11px; font-size: 0.71rem; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
-    .form-group label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-    .form-group input, .form-group select {
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      font-family: var(--font-b);
-      font-size: 0.9rem;
-      outline: none;
-      background: var(--bg);
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus, .form-group select:focus { border-color: var(--accent); background: white; }
-    .form-hint { font-size: 0.75rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
-    .save-btn {
-      margin-top: 1.2rem;
-      padding: 11px 28px;
-      background: var(--text);
-      color: white;
-      border: none;
-      font-family: var(--font-b);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .save-btn:hover { background: var(--accent); }
-    .save-msg { margin-left: 1rem; font-size: 0.82rem; color: var(--success); opacity: 0; transition: opacity 0.3s; }
-    .save-msg.show { opacity: 1; }
+    .form-group.full { grid-column: 1/-1; }
+    .form-group label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .form-group input, .form-group textarea { padding: 9px 12px; border: 1px solid var(--border); font-family: var(--font-b); font-size: 0.9rem; outline: none; background: var(--bg); transition: border-color 0.2s; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); background: white; }
+    .form-hint { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+    .form-actions { margin-top: 1.2rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .feedback { font-size: 0.8rem; color: var(--success); opacity: 0; transition: opacity 0.3s; }
+    .feedback.show { opacity: 1; }
 
-    /* ── PREVIEW TABLE ── */
+    .orders-filters { display: flex; gap: 0.4rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+    .filter-chip { padding: 5px 13px; border: 1px solid var(--border); background: none; font-family: var(--font-b); font-size: 0.73rem; letter-spacing: 0.06em; cursor: pointer; color: var(--muted); transition: all 0.2s; }
+    .filter-chip.active { background: var(--text); color: white; border-color: var(--text); }
+
+    .order-card { border: 1px solid var(--border); margin-bottom: 0.7rem; }
+    .order-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.1rem; background: var(--bg); cursor: pointer; gap: 1rem; flex-wrap: wrap; }
+    .order-id { font-size: 0.71rem; color: var(--muted); font-family: monospace; }
+    .order-meta { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .order-date { font-size: 0.78rem; color: var(--muted); }
+    .order-total { font-family: var(--font-d); font-size: 1.1rem; color: var(--accent); font-weight: 600; }
+    .via-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; font-size: 0.69rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .via-wa { background: #e8f5e9; color: #2e7d32; }
+    .via-email { background: #e3f2fd; color: #1565c0; }
+    .order-body { display: none; padding: 1rem 1.1rem; border-top: 1px solid var(--border); }
+    .order-body.open { display: block; }
+    .order-items-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .order-items-table td { padding: 5px 6px; border-bottom: 1px solid var(--border); }
+    .order-items-table tr:last-child td { border-bottom: none; }
+    .item-total { text-align: right; color: var(--accent); font-weight: 500; }
+    .order-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; flex-wrap: wrap; }
+    .no-orders { text-align: center; padding: 3rem; color: var(--muted); }
+
+    .status-badge { display: inline-flex; align-items: center; padding: 2px 9px; font-size: 0.69rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .st-pending { background: #fff3e0; color: #e65100; }
+    .st-done { background: #e8f5e9; color: var(--success); }
+    .st-cancelled { background: #ffebee; color: var(--error); }
+
+    .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: var(--border); cursor: pointer; border-radius: 24px; transition: background 0.2s; }
+    .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: transform 0.2s; }
+    .toggle input:checked + .toggle-slider { background: var(--accent); }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .toggle-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .toggle-label { font-size: 0.85rem; }
+    .banner-preview { padding: 10px 1.5rem; background: var(--accent); color: white; font-size: 0.82rem; text-align: center; margin-top: 1rem; display: none; border-radius: 2px; }
+    .banner-preview.show { display: block; }
+
+    .cat-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .cat-row { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border: 1px solid var(--border); background: var(--bg); }
+    .cat-count { font-size: 0.76rem; color: var(--muted); margin-left: 0.5rem; }
+    .cat-order { display: flex; gap: 4px; }
+    .cat-order button { width: 26px; height: 26px; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .cat-order button:hover:not(:disabled) { background: var(--text); color: white; border-color: var(--text); }
+    .cat-order button:disabled { opacity: 0.3; cursor: default; }
+
     .preview-table { width: 100%; border-collapse: collapse; }
-    .preview-table th { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); }
-    .preview-table td { padding: 10px; border-bottom: 1px solid var(--border); font-size: 0.88rem; vertical-align: middle; }
+    .preview-table th { font-size: 0.69rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+    .preview-table td { padding: 9px 10px; border-bottom: 1px solid var(--border); font-size: 0.86rem; vertical-align: middle; }
     .preview-table tr:hover td { background: var(--bg); }
-    .prod-thumb { width: 44px; height: 44px; object-fit: cover; display: block; }
-    .prod-thumb-placeholder { width: 44px; height: 44px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border-radius: 2px;
-    }
+    .prod-thumb { width: 40px; height: 40px; object-fit: cover; display: block; }
+    .prod-thumb-ph { width: 40px; height: 40px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; color: var(--accent); }
+    .badge { display: inline-block; padding: 2px 8px; font-size: 0.69rem; letter-spacing: 0.06em; text-transform: uppercase; }
     .badge-ok { background: #e8f5e9; color: var(--success); }
     .badge-no { background: #ffebee; color: var(--error); }
 
-    /* ── RELOAD ── */
-    .reload-btn {
-      padding: 8px 18px;
-      background: none;
-      border: 1px solid var(--border);
-      font-family: var(--font-b);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      color: var(--muted);
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .reload-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .code-box { width: 100%; height: 150px; padding: 1rem; font-family: monospace; font-size: 0.8rem; border: 1px solid var(--border); background: #1a1a1a; color: #f0c674; resize: none; outline: none; }
+
+    .steps { counter-reset: step; display: flex; flex-direction: column; gap: 1rem; }
+    .step { display: flex; gap: 1rem; }
+    .step-num { counter-increment: step; width: 26px; height: 26px; background: var(--accent); color: white; font-size: 0.72rem; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-num::before { content: counter(step); }
+    .step p { font-size: 0.87rem; line-height: 1.7; }
+    .step a { color: var(--accent); }
+    .step code { background: var(--bg); padding: 1px 6px; font-size: 0.8rem; border: 1px solid var(--border); font-family: monospace; }
+    .sheet-cols { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .sheet-col { padding: 3px 9px; background: var(--text); color: white; font-size: 0.73rem; font-family: monospace; }
+
     .spinning { animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-msg { text-align: center; padding: 3rem; color: var(--muted); }
 
-    /* ── EMPTY ── */
-    .empty-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.9rem; }
-
-    @media (max-width: 640px) { .config-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .admin-main { padding: 1rem; } .tabs-bar { padding: 0 0.5rem; } }
   </style>
 </head>
 <body>
@@ -271,163 +161,187 @@
 <div class="auth-screen" id="authScreen">
   <div class="auth-card">
     <h1>✦ Ágape Admin</h1>
-    <p>Acceso solo para el dueño de la tienda</p>
+    <p>Panel de gestión de la tienda</p>
     <input type="password" id="passwordInput" placeholder="Contraseña" onkeydown="if(event.key==='Enter')login()"/>
-    <button onclick="login()">Entrar</button>
+    <button class="auth-btn" onclick="login()">Entrar</button>
     <p class="auth-error" id="authError"></p>
-    <p style="margin-top:1.5rem;font-size:0.73rem;color:var(--muted);">
-      Contraseña por defecto: <strong>agape2024</strong><br>
-      Cámbiala en el archivo <code>admin.html</code>
-    </p>
+    <p style="margin-top:1.5rem;font-size:0.72rem;color:var(--muted);">Contraseña por defecto: <strong>agape2024</strong> — cámbiala en admin.html</p>
   </div>
 </div>
 
 <!-- ADMIN APP -->
 <div id="adminApp">
-
   <header class="admin-header">
-    <div class="logo"><span>✦</span>Creaciones Ágape — Panel Admin</div>
+    <div class="admin-logo"><span>✦</span>Creaciones Ágape — Admin</div>
     <div class="admin-nav">
-      <a href="index.html" target="_blank">Ver Tienda ↗</a>
+      <a href="index.html" target="_blank" class="preview-link">Ver tienda ↗</a>
       <button class="logout-btn" onclick="logout()">Salir</button>
     </div>
   </header>
 
+  <div class="tabs-bar">
+    <button class="tab-btn active" data-tab="dashboard" onclick="switchTab(this)">📊 Inicio</button>
+    <button class="tab-btn" data-tab="orders" onclick="switchTab(this)">📦 Pedidos</button>
+    <button class="tab-btn" data-tab="products" onclick="switchTab(this)">🛍️ Productos</button>
+    <button class="tab-btn" data-tab="banner" onclick="switchTab(this)">📢 Aviso</button>
+    <button class="tab-btn" data-tab="config" onclick="switchTab(this)">⚙️ Config</button>
+  </div>
+
   <main class="admin-main">
 
-    <!-- STATS -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <p class="label">Productos cargados</p>
-        <p class="value" id="statProducts">—</p>
+    <!-- DASHBOARD -->
+    <div class="tab-panel active" id="tab-dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><p class="lbl">Pedidos totales</p><p class="val" id="sTotal">—</p><p class="sub" id="sMonth"></p></div>
+        <div class="stat-card"><p class="lbl">Facturado total</p><p class="val" id="sRevenue">—</p></div>
+        <div class="stat-card"><p class="lbl">Productos activos</p><p class="val" id="sProducts">—</p></div>
+        <div class="stat-card"><p class="lbl">Categorías</p><p class="val" id="sCats">—</p></div>
+        <div class="stat-card"><p class="lbl">Más pedido</p><p class="val" style="font-size:0.95rem;padding-top:4px" id="sTop">—</p></div>
+        <div class="stat-card"><p class="lbl">Último sync</p><p class="val" style="font-size:0.95rem;padding-top:4px" id="sSync">—</p></div>
       </div>
-      <div class="stat-card">
-        <p class="label">Categorías</p>
-        <p class="value" id="statCats">—</p>
-      </div>
-      <div class="stat-card">
-        <p class="label">Precio promedio</p>
-        <p class="value" id="statAvg">—</p>
-      </div>
-      <div class="stat-card">
-        <p class="label">Último sync</p>
-        <p class="value" style="font-size:1rem;padding-top:0.3rem;" id="statSync">—</p>
+      <div class="section-card">
+        <div class="sc-header">
+          <h3>Últimos pedidos</h3>
+          <button class="btn btn-outline btn-sm" onclick="document.querySelector('[data-tab=orders]').click()">Ver todos</button>
+        </div>
+        <div style="padding:0" id="dashRecent"><p class="empty-msg">Aún no hay pedidos registrados</p></div>
       </div>
     </div>
 
-    <!-- INSTRUCTIONS -->
-    <div class="section-card">
-      <div class="section-card-header">
-        <h3>📋 Cómo gestionar tus productos (Google Sheets)</h3>
+    <!-- PEDIDOS -->
+    <div class="tab-panel" id="tab-orders">
+      <div class="section-card">
+        <div class="sc-header">
+          <h3>Historial de pedidos</h3>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <button class="btn btn-outline btn-sm" onclick="exportOrders()">Exportar CSV</button>
+            <button class="btn btn-danger btn-sm" onclick="clearOrders()">Borrar todo</button>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="orders-filters">
+            <button class="filter-chip active" onclick="filterOrders('all',this)">Todos</button>
+            <button class="filter-chip" onclick="filterOrders('WhatsApp',this)">WhatsApp</button>
+            <button class="filter-chip" onclick="filterOrders('Email',this)">Email</button>
+            <button class="filter-chip" onclick="filterOrders('pending',this)">Pendientes</button>
+            <button class="filter-chip" onclick="filterOrders('done',this)">Completados</button>
+          </div>
+          <div id="ordersList"></div>
+        </div>
       </div>
-      <div class="section-card-body">
-        <div class="steps">
-          <div class="step">
-            <div class="step-num"></div>
-            <div class="step-content">
-              <p>Ve a <a href="https://sheets.google.com" target="_blank">Google Sheets</a> y crea una hoja nueva. Nómbrala como quieras.</p>
-            </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="tab-panel" id="tab-products">
+      <div class="section-card">
+        <div class="sc-header">
+          <h3>Productos en la tienda</h3>
+          <button class="btn btn-outline btn-sm" onclick="loadProducts()">
+            <svg id="reloadIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+            Recargar
+          </button>
+        </div>
+        <div style="padding:0" id="productsContainer"><p class="empty-msg">Cargando productos...</p></div>
+      </div>
+
+      <div class="section-card">
+        <div class="sc-header">
+          <h3>Orden de categorías</h3>
+          <button class="btn btn-accent btn-sm" onclick="saveCatOrder()">Guardar orden</button>
+        </div>
+        <div class="sc-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem">Usa las flechas para cambiar el orden en que aparecen los filtros en la tienda.</p>
+          <div class="cat-list" id="catList"><p class="empty-msg" style="padding:1rem">Carga los productos primero</p></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="sc-header"><h3>Cómo gestionar productos</h3></div>
+        <div class="sc-body">
+          <div class="steps">
+            <div class="step"><div class="step-num"></div><div><p>Abre tu <a href="https://sheets.google.com" target="_blank">Google Sheet</a> de productos y edita directamente las filas.</p></div></div>
+            <div class="step"><div class="step-num"></div><div>
+              <p>La fila 1 debe tener exactamente estas columnas en minúsculas:</p>
+              <div class="sheet-cols"><span class="sheet-col">nombre</span><span class="sheet-col">descripcion</span><span class="sheet-col">precio</span><span class="sheet-col">categoria</span><span class="sheet-col">imagen</span><span class="sheet-col">disponible</span></div>
+            </div></div>
+            <div class="step"><div class="step-num"></div><div><p>Para imágenes: sube las fotos a <a href="https://imgbb.com" target="_blank">imgbb.com</a>, abre la imagen, clic derecho → <em>Copiar dirección de imagen</em>. La URL empieza por <code>i.ibb.co</code>.</p></div></div>
+            <div class="step"><div class="step-num"></div><div><p>Para ocultar un producto sin borrarlo, escribe <code>no</code> en la columna <code>disponible</code>.</p></div></div>
+            <div class="step"><div class="step-num"></div><div><p>Los cambios se reflejan en la tienda automáticamente en ~1 minuto.</p></div></div>
           </div>
-          <div class="step">
-            <div class="step-num"></div>
-            <div class="step-content">
-              <p>En la <strong>primera fila</strong>, escribe exactamente estas columnas (en minúsculas, sin tildes):</p>
-              <div class="sheet-template">
-                <table>
-                  <tr>
-                    <th>nombre</th><th>descripcion</th><th>precio</th><th>categoria</th><th>imagen</th><th>disponible</th>
-                  </tr>
-                  <tr>
-                    <td>Llavero corazón</td>
-                    <td>Llavero artesanal hecho a mano</td>
-                    <td>150</td>
-                    <td>Llaveros</td>
-                    <td>https://... (URL de imagen)</td>
-                    <td>si</td>
-                  </tr>
-                  <tr>
-                    <td>Adorno navideño</td>
-                    <td>Árbol de Navidad en resina</td>
-                    <td>280</td>
-                    <td>Adornos</td>
-                    <td></td>
-                    <td>si</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANNER -->
+    <div class="tab-panel" id="tab-banner">
+      <div class="section-card">
+        <div class="sc-header"><h3>Banner de aviso en la tienda</h3></div>
+        <div class="sc-body">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem">Muestra un mensaje destacado en la parte superior de la tienda. Ideal para avisos de vacaciones, retrasos en envíos o novedades.</p>
+          <div class="toggle-row">
+            <label class="toggle"><input type="checkbox" id="bannerActive" onchange="previewBanner()"><span class="toggle-slider"></span></label>
+            <span class="toggle-label" id="bannerLabel">Banner desactivado</span>
           </div>
-          <div class="step">
-            <div class="step-num"></div>
-            <div class="step-content">
-              <p>Para agregar imágenes: sube tu foto a <a href="https://imgbb.com" target="_blank">imgbb.com</a> (gratis) y pega la URL directa en la columna <code>imagen</code>.</p>
-            </div>
+          <div class="form-group" style="margin-bottom:1rem">
+            <label>Texto del aviso</label>
+            <input type="text" id="bannerText" placeholder="Ej: Cerrado por vacaciones del 20 al 30 de agosto 🌴" oninput="previewBanner()" maxlength="120"/>
+            <p class="form-hint">Máximo 120 caracteres. Puedes usar emojis.</p>
           </div>
-          <div class="step">
-            <div class="step-num"></div>
-            <div class="step-content">
-              <p>Para publicar: ve a <strong>Archivo → Compartir → Publicar en la web</strong>. Elige <em>Hoja1</em> y formato <em>Valores separados por comas (.csv)</em>. Copia el ID de la URL (la parte larga entre <code>/d/</code> y <code>/edit</code>).</p>
-            </div>
+          <div class="banner-preview" id="bannerPreview"></div>
+          <div class="form-actions">
+            <button class="btn btn-dark" onclick="saveBanner()">Guardar aviso</button>
+            <button class="btn btn-outline" onclick="clearBanner()">Quitar aviso</button>
+            <span class="feedback" id="bannerFeedback">✓ Aviso guardado</span>
           </div>
-          <div class="step">
-            <div class="step-num"></div>
-            <div class="step-content">
-              <p>Pega ese ID en la sección de configuración de abajo. ¡Listo! Cada vez que edites la hoja, los cambios se ven en la tienda automáticamente.</p>
-            </div>
+          <div style="margin-top:1.5rem;padding:1rem;background:var(--accent-light);border:1px solid #e0c87a;font-size:0.81rem;color:#7a5c00;line-height:1.6">
+            ℹ️ El aviso se guarda en el navegador de este dispositivo. Para que todos los clientes lo vean, el aviso debe activarse desde el mismo dispositivo/navegador donde está hospedada la tienda, o bien usando un servicio externo como Firebase.
           </div>
         </div>
       </div>
     </div>
 
     <!-- CONFIG -->
-    <div class="section-card">
-      <div class="section-card-header">
-        <h3>⚙️ Configuración de la tienda</h3>
-      </div>
-      <div class="section-card-body">
-        <div class="config-grid">
-          <div class="form-group">
-            <label>ID de Google Sheets</label>
-            <input type="text" id="cfgSheetId" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"/>
-            <p class="form-hint">La parte larga de la URL de tu hoja: docs.google.com/spreadsheets/d/<strong>ESTE_ID</strong>/edit</p>
+    <div class="tab-panel" id="tab-config">
+      <div class="section-card">
+        <div class="sc-header"><h3>Configuración de la tienda</h3></div>
+        <div class="sc-body">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>URL de Google Sheets (CSV)</label>
+              <input type="text" id="cfgSheetId" placeholder="https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?output=csv"/>
+              <p class="form-hint">La URL completa de Archivo → Compartir → Publicar en la web → CSV</p>
+            </div>
+            <div class="form-group">
+              <label>Número de WhatsApp</label>
+              <input type="text" id="cfgWhatsapp" placeholder="521234567890"/>
+              <p class="form-hint">Con código de país, sin +, espacios ni guiones</p>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" id="cfgEmail" placeholder="tucorreo@gmail.com"/>
+            </div>
+            <div class="form-group">
+              <label>Símbolo de moneda</label>
+              <input type="text" id="cfgCurrency" placeholder="$" style="max-width:100px"/>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Número de WhatsApp</label>
-            <input type="text" id="cfgWhatsapp" placeholder="521234567890"/>
-            <p class="form-hint">Con código de país, sin +, espacios ni guiones. Ejemplo: 521234567890</p>
+          <div class="form-actions">
+            <button class="btn btn-dark" onclick="generateConfig()">Generar config.js</button>
+            <button class="btn btn-accent" id="copyBtn" onclick="copyConfig()" style="display:none">Copiar código</button>
+            <span class="feedback" id="copyFeedback">✓ ¡Copiado!</span>
           </div>
-          <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" id="cfgEmail" placeholder="tucorreo@gmail.com"/>
-            <p class="form-hint">Aquí recibirás los pedidos por email</p>
-          </div>
-          <div class="form-group">
-            <label>Símbolo de moneda</label>
-            <input type="text" id="cfgCurrency" placeholder="$" style="max-width:80px"/>
+          <div id="configOutput" style="display:none;margin-top:1rem">
+            <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem">Copia este código y reemplaza el contenido de tu <code>config.js</code> en GitHub:</p>
+            <textarea class="code-box" id="configCode" readonly></textarea>
           </div>
         </div>
-        <div style="margin-top:1rem;padding:1rem;background:var(--accent-light);border:1px solid #e0c87a;font-size:0.82rem;color:#7a5c00;">
-          ⚠️ <strong>Nota:</strong> Después de guardar los cambios aquí, deberás copiar los valores al archivo <code>config.js</code> para que la tienda los use. Esta pantalla es solo una guía visual.
-        </div>
-        <div style="margin-top:1.2rem;display:flex;align-items:center;">
-          <button class="save-btn" onclick="generateConfig()">Generar config.js</button>
-          <span class="save-msg" id="saveMsg">✓ ¡Copiado al portapapeles!</span>
-        </div>
       </div>
-    </div>
-
-    <!-- PRODUCT PREVIEW -->
-    <div class="section-card">
-      <div class="section-card-header">
-        <h3>🛍️ Vista previa de productos</h3>
-        <button class="reload-btn" id="reloadBtn" onclick="loadPreview()">
-          <svg id="reloadIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
-          Recargar productos
-        </button>
-      </div>
-      <div class="section-card-body" style="padding:0">
-        <div id="previewContainer">
-          <p class="empty-msg">Configura tu Sheet ID y haz clic en "Recargar productos"</p>
+      <div class="section-card">
+        <div class="sc-header"><h3>Cambiar contraseña del admin</h3></div>
+        <div class="sc-body">
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:1rem">Abre el archivo <code>admin.html</code>, busca esta línea y cambia el valor:</p>
+          <textarea class="code-box" readonly style="height:56px">const ADMIN_PASSWORD = "agape2024"; // ← cambia agape2024 por tu contraseña</textarea>
+          <p style="font-size:0.78rem;color:var(--muted);margin-top:0.8rem">Guarda el archivo y súbelo a GitHub para que el cambio tenga efecto.</p>
         </div>
       </div>
     </div>
@@ -437,157 +351,321 @@
 
 <script src="config.js"></script>
 <script>
-  // ── AUTH ──
-  const ADMIN_PASSWORD = "agape2024"; // ← CAMBIA ESTA CONTRASEÑA
+const ADMIN_PASSWORD = "agape2024"; // ← CAMBIA ESTA CONTRASEÑA
 
-  function login() {
-    const val = document.getElementById('passwordInput').value;
-    if (val === ADMIN_PASSWORD) {
-      document.getElementById('authScreen').style.display = 'none';
-      document.getElementById('adminApp').style.display = 'block';
-      loadConfig();
-      loadPreview();
-    } else {
-      document.getElementById('authError').textContent = 'Contraseña incorrecta. Inténtalo de nuevo.';
-    }
+// ── AUTH ──
+function login() {
+  if (document.getElementById('passwordInput').value === ADMIN_PASSWORD) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'block';
+    initAdmin();
+  } else {
+    document.getElementById('authError').textContent = 'Contraseña incorrecta.';
   }
+}
+function logout() {
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('passwordInput').value = '';
+}
 
-  function logout() {
-    document.getElementById('authScreen').style.display = 'flex';
-    document.getElementById('adminApp').style.display = 'none';
-    document.getElementById('passwordInput').value = '';
+// ── TABS ──
+function switchTab(btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── INIT ──
+function initAdmin() {
+  loadConfigForm();
+  loadOrderStats();
+  renderDashRecent();
+  renderOrdersList('all');
+  loadProducts();
+  loadBannerForm();
+}
+
+// ════════ ORDERS ════════
+function getOrders() { return JSON.parse(localStorage.getItem('agape_orders') || '[]'); }
+function saveOrdersData(o) { localStorage.setItem('agape_orders', JSON.stringify(o)); }
+
+function loadOrderStats() {
+  const orders = getOrders();
+  document.getElementById('sTotal').textContent = orders.length;
+  const now = new Date();
+  const month = orders.filter(o => { const d=new Date(o.date); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear(); });
+  document.getElementById('sMonth').textContent = month.length + ' este mes';
+  const rev = orders.reduce((s,o) => s+(o.total||0), 0);
+  document.getElementById('sRevenue').textContent = '$' + rev.toFixed(0);
+  const freq = {};
+  orders.forEach(o => (o.items||[]).forEach(i => { freq[i.name]=(freq[i.name]||0)+i.qty; }));
+  const top = Object.entries(freq).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('sTop').textContent = top ? top[0] : '—';
+}
+
+function renderDashRecent() {
+  const orders = getOrders().slice(0,5);
+  const el = document.getElementById('dashRecent');
+  if (!orders.length) { el.innerHTML = '<p class="empty-msg">Aún no hay pedidos. Aparecerán aquí cuando los clientes usen el carrito.</p>'; return; }
+  el.innerHTML = `<table class="preview-table"><thead><tr><th>Fecha</th><th>Productos</th><th>Total</th><th>Vía</th><th>Estado</th></tr></thead><tbody>
+    ${orders.map(o=>`<tr>
+      <td>${fmtDate(o.date)}</td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)">${(o.items||[]).map(i=>i.name).join(', ')}</td>
+      <td style="color:var(--accent);font-weight:500">$${(o.total||0).toFixed(2)}</td>
+      <td><span class="via-badge ${o.via==='WhatsApp'?'via-wa':'via-email'}">${o.via}</span></td>
+      <td><span class="status-badge ${stClass(o.status)}">${stLabel(o.status)}</span></td>
+    </tr>`).join('')}
+  </tbody></table>`;
+}
+
+let curFilter = 'all';
+function filterOrders(f, btn) {
+  curFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderOrdersList(f);
+}
+
+function renderOrdersList(f) {
+  let orders = getOrders();
+  if (f==='WhatsApp') orders=orders.filter(o=>o.via==='WhatsApp');
+  else if (f==='Email') orders=orders.filter(o=>o.via==='Email');
+  else if (f==='pending') orders=orders.filter(o=>!o.status||o.status==='pending');
+  else if (f==='done') orders=orders.filter(o=>o.status==='done');
+
+  const el = document.getElementById('ordersList');
+  if (!orders.length) { el.innerHTML='<div class="no-orders"><p style="font-size:2rem;margin-bottom:0.5rem">📭</p><p>No hay pedidos en esta categoría</p></div>'; return; }
+  el.innerHTML = orders.map(o=>`
+    <div class="order-card">
+      <div class="order-header" onclick="toggleOrder('${o.id}')">
+        <div><span class="order-id">#${String(o.id).slice(-6)}</span><span class="order-date" style="margin-left:0.8rem">${fmtDate(o.date)}</span></div>
+        <div class="order-meta">
+          <span class="via-badge ${o.via==='WhatsApp'?'via-wa':'via-email'}">${o.via==='WhatsApp'?'📱':'✉️'} ${o.via}</span>
+          <span class="order-total">$${(o.total||0).toFixed(2)}</span>
+          <span class="status-badge ${stClass(o.status)}">${stLabel(o.status)}</span>
+        </div>
+      </div>
+      <div class="order-body" id="ob-${o.id}">
+        <table class="order-items-table">
+          ${(o.items||[]).map(i=>`<tr><td>${i.name}</td><td>x${i.qty}</td><td class="item-total">$${(i.price*i.qty).toFixed(2)}</td></tr>`).join('')}
+          <tr><td colspan="2" style="font-weight:500;padding-top:8px">Total</td><td class="item-total" style="font-weight:600">$${(o.total||0).toFixed(2)}</td></tr>
+        </table>
+        <div class="order-actions">
+          <button class="btn btn-green btn-sm" onclick="setStatus('${o.id}','done')">✓ Completado</button>
+          <button class="btn btn-danger btn-sm" onclick="setStatus('${o.id}','cancelled')">✕ Cancelar</button>
+          <button class="btn btn-outline btn-sm" onclick="setStatus('${o.id}','pending')">↩ Pendiente</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleOrder(id) { const el=document.getElementById('ob-'+id); if(el) el.classList.toggle('open'); }
+
+function setStatus(id, status) {
+  const orders = getOrders();
+  const o = orders.find(x=>String(x.id)===String(id));
+  if (o) { o.status=status; saveOrdersData(orders); renderOrdersList(curFilter); loadOrderStats(); renderDashRecent(); }
+}
+
+function clearOrders() {
+  if (!confirm('¿Borrar todo el historial de pedidos? Esta acción no se puede deshacer.')) return;
+  localStorage.removeItem('agape_orders');
+  loadOrderStats(); renderDashRecent(); renderOrdersList('all');
+}
+
+function exportOrders() {
+  const orders = getOrders();
+  if (!orders.length) { alert('No hay pedidos para exportar.'); return; }
+  const rows = [['ID','Fecha','Vía','Productos','Total','Estado']];
+  orders.forEach(o => {
+    const items = (o.items||[]).map(i=>`${i.name} x${i.qty}`).join(' | ');
+    rows.push([String(o.id).slice(-6), fmtDate(o.date), o.via, items, (o.total||0).toFixed(2), stLabel(o.status)]);
+  });
+  const csv = rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'pedidos-agape.csv';
+  a.click();
+}
+
+function fmtDate(iso) {
+  const d=new Date(iso);
+  return d.toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+function stLabel(s) { return s==='done'?'Completado':s==='cancelled'?'Cancelado':'Pendiente'; }
+function stClass(s) { return s==='done'?'st-done':s==='cancelled'?'st-cancelled':'st-pending'; }
+
+// ════════ PRODUCTS ════════
+let allProds = [];
+let catOrder = JSON.parse(localStorage.getItem('agape_cat_order')||'[]');
+
+async function loadProducts() {
+  const icon = document.getElementById('reloadIcon');
+  const container = document.getElementById('productsContainer');
+  icon.classList.add('spinning');
+  const sheetUrl = typeof CONFIG!=='undefined' ? CONFIG.SHEET_ID : '';
+  if (!sheetUrl || sheetUrl.includes('TU_')) {
+    container.innerHTML='<p class="empty-msg">Configura la URL de Google Sheets en la pestaña Config.</p>';
+    icon.classList.remove('spinning'); return;
   }
+  const url = sheetUrl.startsWith('http') ? sheetUrl : `https://docs.google.com/spreadsheets/d/${sheetUrl}/gviz/tq?tqx=out:csv`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    allProds = parseCSV(await res.text());
+    document.getElementById('sProducts').textContent = allProds.length;
+    const cats = [...new Set(allProds.map(p=>p.category))];
+    document.getElementById('sCats').textContent = cats.length;
+    document.getElementById('sSync').textContent = new Date().toLocaleTimeString('es-MX');
+    renderProdsTable();
+    renderCats(cats);
+  } catch(e) {
+    container.innerHTML='<p class="empty-msg">No se pudo cargar. Verifica la URL en Config.</p>';
+  } finally { icon.classList.remove('spinning'); }
+}
 
-  // ── LOAD CONFIG INTO FORM ──
-  function loadConfig() {
-    if (typeof CONFIG === 'undefined') return;
-    document.getElementById('cfgSheetId').value = CONFIG.SHEET_ID || '';
-    document.getElementById('cfgWhatsapp').value = CONFIG.WHATSAPP || '';
-    document.getElementById('cfgEmail').value = CONFIG.EMAIL || '';
-    document.getElementById('cfgCurrency').value = CONFIG.CURRENCY || '$';
+function renderProdsTable() {
+  const c = document.getElementById('productsContainer');
+  if (!allProds.length) { c.innerHTML='<p class="empty-msg">La hoja está vacía.</p>'; return; }
+  c.innerHTML=`<table class="preview-table"><thead><tr><th>Img</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Descripción</th><th>Estado</th></tr></thead><tbody>
+    ${allProds.map(p=>`<tr>
+      <td>${p.image?`<img class="prod-thumb" src="${p.image}" onerror="this.outerHTML='<div class=\\'prod-thumb-ph\\'>✦</div>'">`:`<div class="prod-thumb-ph">✦</div>`}</td>
+      <td><strong>${p.name}</strong></td><td>${p.category}</td>
+      <td style="color:var(--accent)">$${p.price.toFixed(2)}</td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)">${p.desc||'—'}</td>
+      <td><span class="badge ${p.available?'badge-ok':'badge-no'}">${p.available?'Activo':'Oculto'}</span></td>
+    </tr>`).join('')}
+  </tbody></table>`;
+}
+
+function renderCats(cats) {
+  const ordered = catOrder.length ? [...catOrder.filter(c=>cats.includes(c)),...cats.filter(c=>!catOrder.includes(c))] : [...cats];
+  catOrder = ordered;
+  const el = document.getElementById('catList');
+  if (!ordered.length) { el.innerHTML='<p class="empty-msg" style="padding:1rem">No hay categorías</p>'; return; }
+  el.innerHTML = ordered.map((cat,i)=>{
+    const count = allProds.filter(p=>p.category===cat).length;
+    return `<div class="cat-row">
+      <div><span style="font-size:0.9rem">${cat}</span><span class="cat-count">(${count} producto${count!==1?'s':''})</span></div>
+      <div class="cat-order">
+        <button onclick="moveCat(${i},-1)" ${i===0?'disabled':''}>↑</button>
+        <button onclick="moveCat(${i},1)" ${i===ordered.length-1?'disabled':''}>↓</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function moveCat(idx, dir) {
+  const ni = idx+dir;
+  if (ni<0||ni>=catOrder.length) return;
+  [catOrder[idx],catOrder[ni]]=[catOrder[ni],catOrder[idx]];
+  renderCats(catOrder);
+}
+
+function saveCatOrder() {
+  localStorage.setItem('agape_cat_order', JSON.stringify(catOrder));
+  alert('Orden guardado ✓');
+}
+
+// ════════ BANNER ════════
+function loadBannerForm() {
+  const b = JSON.parse(localStorage.getItem('agape_banner')||'{}');
+  document.getElementById('bannerActive').checked = !!b.active;
+  document.getElementById('bannerText').value = b.text||'';
+  updateBannerLabel(!!b.active);
+  previewBanner();
+}
+
+function previewBanner() {
+  const active = document.getElementById('bannerActive').checked;
+  const text = document.getElementById('bannerText').value.trim();
+  const prev = document.getElementById('bannerPreview');
+  updateBannerLabel(active);
+  if (active && text) { prev.textContent=text; prev.classList.add('show'); }
+  else { prev.classList.remove('show'); }
+}
+
+function updateBannerLabel(active) {
+  document.getElementById('bannerLabel').textContent = active ? 'Banner activado' : 'Banner desactivado';
+}
+
+function saveBanner() {
+  const active = document.getElementById('bannerActive').checked;
+  const text = document.getElementById('bannerText').value.trim();
+  localStorage.setItem('agape_banner', JSON.stringify({active,text}));
+  showFeedback('bannerFeedback');
+}
+
+function clearBanner() {
+  localStorage.removeItem('agape_banner');
+  document.getElementById('bannerActive').checked=false;
+  document.getElementById('bannerText').value='';
+  previewBanner();
+}
+
+// ════════ CONFIG ════════
+function loadConfigForm() {
+  if (typeof CONFIG==='undefined') return;
+  document.getElementById('cfgSheetId').value = CONFIG.SHEET_ID||'';
+  document.getElementById('cfgWhatsapp').value = CONFIG.WHATSAPP||'';
+  document.getElementById('cfgEmail').value = CONFIG.EMAIL||'';
+  document.getElementById('cfgCurrency').value = CONFIG.CURRENCY||'$';
+}
+
+function generateConfig() {
+  const id=document.getElementById('cfgSheetId').value.trim();
+  const wa=document.getElementById('cfgWhatsapp').value.trim();
+  const em=document.getElementById('cfgEmail').value.trim();
+  const cu=document.getElementById('cfgCurrency').value.trim()||'$';
+  if (!id) { alert('Escribe primero la URL de tu Google Sheet.'); return; }
+  document.getElementById('configCode').value=`const CONFIG = {\n  SHEET_ID: "${id}",\n  WHATSAPP: "${wa}",\n  EMAIL: "${em}",\n  CURRENCY: "${cu}",\n  CURRENCY_CODE: "MXN",\n  STORE_NAME: "Creaciones Ágape",\n};`;
+  document.getElementById('configOutput').style.display='block';
+  document.getElementById('copyBtn').style.display='inline-flex';
+}
+
+function copyConfig() {
+  const ta=document.getElementById('configCode');
+  ta.select(); ta.setSelectionRange(0,99999);
+  try { navigator.clipboard.writeText(ta.value).catch(()=>document.execCommand('copy')); }
+  catch(e) { document.execCommand('copy'); }
+  showFeedback('copyFeedback');
+}
+
+// ════════ UTILS ════════
+function showFeedback(id) {
+  const el=document.getElementById(id);
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+function parseCSV(csv) {
+  const lines=csv.trim().split('\n');
+  if (lines.length<2) return [];
+  const headers=lines[0].replace(/"/g,'').split(',').map(h=>h.trim().toLowerCase());
+  return lines.slice(1).map((line,i)=>{
+    const vals=parseCSVLine(line); const obj={};
+    headers.forEach((h,idx)=>{obj[h]=(vals[idx]||'').trim();});
+    return {
+      id:i+1, name:obj['nombre']||obj['name']||'Producto',
+      desc:obj['descripcion']||obj['description']||obj['desc']||'',
+      price:parseFloat((obj['precio']||obj['price']||'0').replace(/[^0-9.]/g,''))||0,
+      category:obj['categoria']||obj['category']||'General',
+      image:obj['imagen']||obj['image']||obj['img']||'',
+      available:(obj['disponible']||obj['available']||'si').toLowerCase()!=='no',
+    };
+  });
+}
+
+function parseCSVLine(line) {
+  const r=[]; let c=''; let q=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){q=!q;}else if(ch===','&&!q){r.push(c);c='';}else{c+=ch;}
   }
-
-  // ── GENERATE CONFIG ──
-  function generateConfig() {
-    const id = document.getElementById('cfgSheetId').value.trim();
-    const wa = document.getElementById('cfgWhatsapp').value.trim();
-    const em = document.getElementById('cfgEmail').value.trim();
-    const cu = document.getElementById('cfgCurrency').value.trim() || '$';
-
-    const code = `const CONFIG = {
-  SHEET_ID: "${id}",
-  WHATSAPP: "${wa}",
-  EMAIL: "${em}",
-  CURRENCY: "${cu}",
-  CURRENCY_CODE: "MXN",
-  STORE_NAME: "Creaciones Ágape",
-};`;
-
-    navigator.clipboard.writeText(code).then(() => {
-      const msg = document.getElementById('saveMsg');
-      msg.classList.add('show');
-      setTimeout(() => msg.classList.remove('show'), 3000);
-    });
-  }
-
-  // ── LOAD PREVIEW ──
-  async function loadPreview() {
-    const sheetId = document.getElementById('cfgSheetId').value.trim() || CONFIG.SHEET_ID;
-    const container = document.getElementById('previewContainer');
-    const icon = document.getElementById('reloadIcon');
-    icon.classList.add('spinning');
-
-    if (!sheetId || sheetId === 'TU_SHEET_ID_AQUI') {
-      container.innerHTML = '<p class="empty-msg">Ingresa tu Sheet ID en la configuración primero</p>';
-      icon.classList.remove('spinning');
-      return;
-    }
-
-    try {
-      const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error();
-      const csv = await res.text();
-      const products = parseCSVAdmin(csv);
-
-      // Update stats
-      document.getElementById('statProducts').textContent = products.length;
-      const cats = new Set(products.map(p => p.category));
-      document.getElementById('statCats').textContent = cats.size;
-      const avg = products.length ? products.reduce((s, p) => s + p.price, 0) / products.length : 0;
-      document.getElementById('statAvg').textContent = `$${avg.toFixed(0)}`;
-      document.getElementById('statSync').textContent = new Date().toLocaleTimeString('es-MX');
-
-      if (products.length === 0) {
-        container.innerHTML = '<p class="empty-msg">La hoja está vacía. Agrega productos con las columnas indicadas.</p>';
-        return;
-      }
-
-      container.innerHTML = `
-        <table class="preview-table">
-          <thead>
-            <tr>
-              <th>Img</th>
-              <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Precio</th>
-              <th>Descripción</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${products.map(p => `
-              <tr>
-                <td>${p.image
-                  ? `<img class="prod-thumb" src="${p.image}" onerror="this.outerHTML='<div class=\\'prod-thumb-placeholder\\'>✦</div>'">`
-                  : `<div class="prod-thumb-placeholder">✦</div>`}</td>
-                <td><strong>${p.name}</strong></td>
-                <td>${p.category}</td>
-                <td>$${p.price.toFixed(2)}</td>
-                <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)">${p.desc || '—'}</td>
-                <td><span class="badge ${p.available ? 'badge-ok' : 'badge-no'}">${p.available ? 'Activo' : 'Oculto'}</span></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>`;
-    } catch (e) {
-      container.innerHTML = `<p class="empty-msg">No se pudo cargar la hoja. Verifica el Sheet ID y que esté publicada como CSV.</p>`;
-    } finally {
-      icon.classList.remove('spinning');
-    }
-  }
-
-  function parseCSVAdmin(csv) {
-    const lines = csv.trim().split('\n');
-    if (lines.length < 2) return [];
-    const headers = lines[0].replace(/"/g,'').split(',').map(h => h.trim().toLowerCase());
-    return lines.slice(1).map((line, i) => {
-      const vals = parseCSVLineAdmin(line);
-      const obj = {};
-      headers.forEach((h, idx) => { obj[h] = (vals[idx] || '').trim(); });
-      return {
-        id: i+1,
-        name: obj['nombre'] || obj['name'] || 'Producto',
-        desc: obj['descripcion'] || obj['description'] || obj['desc'] || '',
-        price: parseFloat((obj['precio'] || obj['price'] || '0').replace(/[^0-9.]/g, '')) || 0,
-        category: obj['categoria'] || obj['category'] || 'General',
-        image: obj['imagen'] || obj['image'] || obj['img'] || '',
-        available: (obj['disponible'] || obj['available'] || 'si').toLowerCase() !== 'no',
-      };
-    });
-  }
-
-  function parseCSVLineAdmin(line) {
-    const result = []; let cur = ''; let inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') { inQ = !inQ; }
-      else if (ch === ',' && !inQ) { result.push(cur); cur = ''; }
-      else { cur += ch; }
-    }
-    result.push(cur);
-    return result;
-  }
+  r.push(c); return r;
+}
 </script>
 </body>
 </html>

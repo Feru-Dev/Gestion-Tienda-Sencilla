@@ -12,7 +12,7 @@ const CONFIG = {
 
   // ── Contacto ───────────────────────────────────────────
   // Tu número de WhatsApp con código de país (sin + ni espacios)
-  WHATSAPP: "521234567890",
+  WHATSAPP: "123456789",
 
   // Tu correo electrónico para recibir pedidos
   EMAIL: "tucorreo@gmail.com",

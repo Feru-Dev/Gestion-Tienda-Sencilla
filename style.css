@@ -33,6 +33,32 @@ body {
   overflow-x: hidden;
 }
 
+/* ── BANNER ── */
+#storeBanner {
+  background: var(--accent);
+  color: white;
+  text-align: center;
+  padding: 10px 2rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  font-weight: 400;
+  position: relative;
+}
+#storeBanner .banner-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+#storeBanner .banner-close:hover { opacity: 1; }
+
 /* ── HEADER ── */
 header {
   position: sticky;
